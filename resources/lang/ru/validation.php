@@ -144,6 +144,7 @@ return [
         'email'                 => 'E-Mail адрес',
         'excerpt'               => 'Выдержка',
         'first_name'            => 'Имя',
+        'patronymic'            => 'Отчество',
         'gender'                => 'Пол',
         'hour'                  => 'Час',
         'last_name'             => 'Фамилия',

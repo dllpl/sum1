@@ -15,59 +15,65 @@
                     <p class="text-2xl font-semibold">
                         Заполнить заявку
                     </p>
+                    <!-- Validation Errors -->
+                    <x-auth-validation-errors class="mb-4" :errors="$errors"/>
 
+                    @if (session('success'))
+                        <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mt-4" role="alert">
+                            <div class="flex">
+                                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                                <div>
+                                    <p class="font-bold">{{ session('success') }} </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     @role ('user')
-                    <form method="POST" action="{{ route('login') }}" class="mt-4">
-                    @csrf
+                    <form method="POST" action="{{ route('post') }}" class="mt-4">
+                        @csrf
 
-                    <!-- Email Address -->
                         <div>
-                            <x-label for="first_name" :value="__('Имя')"/>
+                            <x-label for="last_name" :value="__('Фамилия')"/>
 
-                            <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required
+                            <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name"
+                                     :value="old('last_name')" required
                                      autofocus/>
                         </div>
                         <div class="mt-4">
-                            <x-label for="last_name" :value="__('Фамилия')"/>
+                            <x-label for="first_name" :value="__('Имя')"/>
 
-                            <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required
+                            <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name"
+                                     :value="old('first_name')" required
                                      autofocus/>
                         </div>
                         <div class="mt-4">
                             <x-label for="patronymic" :value="__('Отчество')"/>
 
-                            <x-input id="patronymic" class="block mt-1 w-full" type="text" name="patronymic" :value="old('patronymic')" required
+                            <x-input id="patronymic" class="block mt-1 w-full" type="text" name="patronymic"
+                                     :value="old('patronymic')" required
                                      autofocus/>
                         </div>
                         <div class="mt-4">
                             <x-label for="address" :value="__('Адрес')"/>
 
-                            <x-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required
+                            <x-input id="address" class="block mt-1 w-full" type="text" name="address"
+                                     :value="old('address')" required
                                      autofocus/>
                         </div>
                         <div class="mt-4">
                             <x-label for="phone" :value="__('Телефон')"/>
 
-                            <x-input id="phone" class="block mt-1 w-full" type="number" name="address" :value="old('phone')" required
+                            <x-input id="phone" class="block mt-1 w-full" type="number" name="phone"
+                                     :value="old('phone')" required
                                      autofocus/>
                         </div>
                         <div class="mt-4">
                             <x-label for="email" :value="__('Почта')"/>
 
-                            <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
+                            <x-input id="email" class="block mt-1 w-full" type="email" name="email"
+                                     :value="old('email')" required
                                      autofocus/>
                         </div>
-
-                        <!-- Remember Me -->
-                        <div class="block mt-4">
-                            <label for="remember_me" class="inline-flex items-center">
-                                <input id="remember_me" type="checkbox"
-                                       class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                       name="remember">
-                                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                            </label>
-                        </div>
-
 
                         <div class="flex items-center justify-around mt-4">
                             <x-button class="ml-3">
