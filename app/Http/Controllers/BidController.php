@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bid;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class BidController extends Controller
@@ -12,10 +15,16 @@ class BidController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
+        $auth = Auth::user();
+        if ($auth) {
+            if ($auth->hasRole('admin')) {
+                return view('dashboard', ['bids' => Bid::all()->sortDesc()]);
+            } else return view('dashboard');
+        } else return view('auth.login');
 
     }
 
@@ -63,11 +72,18 @@ class BidController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        if ($request['select_filter'] === 'fio') {
+//            return view('dashboard', [
+//                'bids' => Bid::all()->where()
+//            ]);
+        }
+        return view('dashboard', [
+            'bids' => Bid::all()->where($request['select_filter'], $request['input_filter'])
+        ]);
     }
 
     /**

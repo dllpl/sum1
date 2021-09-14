@@ -21,11 +21,15 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/dashboard', [BidController::class, 'index'])->name('dashboard');
+
 Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/test', function () {
         return view('test');
     });
+    Route::post('/dashboard', [BidController::class, 'show'])->name('search');
 });
+
 
 Route::post('/post', [BidController::class,'create'])->name('post');
 
