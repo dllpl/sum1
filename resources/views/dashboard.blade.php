@@ -108,10 +108,12 @@
                                                     <div class="text-sm text-gray-900">{{$bid->created_at}}</div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                    <a href="{{route('edit', ['id'=> $bid->id])}}" class="text-indigo-600 hover:text-indigo-900">Редактировать</a>
+                                                    <a href="{{route('edit', ['id'=> $bid->id])}}"
+                                                       class="text-indigo-600 hover:text-indigo-900">Редактировать</a>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                    <a href="{{route('delete', ['id'=> $bid->id])}}" class="text-indigo-600 hover:text-indigo-900">Удалить</a>
+                                                    <a href="{{route('delete', ['id'=> $bid->id])}}"
+                                                       class="text-indigo-600 hover:text-indigo-900">Удалить</a>
                                                 </td>
                                             </tr>
                                         @endforeach

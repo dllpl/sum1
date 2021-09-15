@@ -30,9 +30,9 @@
                     @endif
 
                     @role('admin')
-                        <div>
-                            <canvas id="myChart"></canvas>
-                        </div>
+                    <div>
+                        <canvas id="myChart"></canvas>
+                    </div>
                     @endrole
                 </div>
             </div>
@@ -43,7 +43,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     let days = <?php echo $days; ?>;
-    let bid_in_days = <?php echo $bid_in_days ; ?>;
+    let bid_in_days = <?php echo $bid_in_days; ?>;
 
     let barChartData = {
         labels: days,
@@ -53,9 +53,7 @@
             data: bid_in_days
         }]
     };
-
-
-    window.onload = function() {
+    window.onload = function () {
         let ctx = document.getElementById("myChart").getContext("2d");
         window.myBar = new Chart(ctx, {
             type: 'bar',
@@ -65,5 +63,4 @@
             }
         });
     };
-
 </script>
