@@ -1,5 +1,7 @@
 Решение задачки на Laravel + Tailwind CSS + ChartsJS. БД MySQL Реализовано распределение ролей и все необходимые валидации. За процессом разработки можно наблюдать в коммитах. Работоспособность проверить по адресу: therockyholl.myjino.ru
 
+Данные для входа: admin@mail.ru 123123123
+
 ![image](https://user-images.githubusercontent.com/58739981/133436734-b11f1e6c-1bc6-43e7-b1ff-1bebec41ccc5.png)
 Экран отправки заявки.
 
