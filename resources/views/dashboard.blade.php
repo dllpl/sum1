@@ -25,8 +25,9 @@
                                     class="text-base text-gray-800 outline-none border-2 py-2 rounded-lg ml-3">
                                 <option value="fio" selected>ФИО</option>
                                 <option value="address">Адрес</option>
+                                <option value="email">Почта</option>
                                 <option value="phone">Телефон</option>
-                                <option value="date">Дата заказа</option>
+                                <option value="created_at">Дата заказа</option>
                             </select>
                             <div class="ms:flex items-center px-2 rounded-lg space-x-4">
                                 <button class="bg-indigo-500 text-white text-base rounded-lg px-4 py-2 font-thin">
@@ -70,25 +71,25 @@
                                                     <div class="flex items-center">
                                                         <div class="ml-4">
                                                             <div class="text-sm font-medium text-gray-900">
-                                                                {{$bid['last_name']}} {{$bid['first_name']}} {{$bid['patronymic']}}
+                                                                {{$bid->last_name}} {{$bid->first_name}} {{$bid->patronymic}}
                                                             </div>
                                                             <div class="text-sm text-gray-500">
-                                                                {{$bid['email']}}
+                                                                {{$bid->email}}
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    <div class="text-sm text-gray-900">{{$bid['address']}}</div>
+                                                    <div class="text-sm text-gray-900">{{$bid->address}}</div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                 <span
                                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                    {{$bid['phone']}}
+                                                    {{$bid->phone}}
                                                 </span>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    <div class="text-sm text-gray-900">{{$bid['created_at']}}</div>
+                                                    <div class="text-sm text-gray-900">{{$bid->created_at}}</div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <a href="#" class="text-indigo-600 hover:text-indigo-900">Редактировать</a>

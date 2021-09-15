@@ -22,7 +22,7 @@ class BidController extends Controller
         $auth = Auth::user();
         if ($auth) {
             if ($auth->hasRole('admin')) {
-                return view('dashboard', ['bids' => Bid::all()->sortDesc()]);
+                return view('dashboard', ['bids' => DB::table('Bids')->orderBy('created_at', 'DESC')->get()]);
             } else return view('dashboard');
         } else return view('auth.login');
 
@@ -77,12 +77,19 @@ class BidController extends Controller
     public function show(Request $request)
     {
         if ($request['select_filter'] === 'fio') {
-//            return view('dashboard', [
-//                'bids' => Bid::all()->where()
-//            ]);
+            return view('dashboard', [
+                'bids' => DB::table('Bids')
+                    ->where('last_name', $request['input_filter'])
+                    ->orWhere('first_name', $request['input_filter'])
+                    ->orWhere('patronymic', $request['input_filter'])
+                    ->orWhereRaw("concat(last_name, ' ', first_name, ' ', patronymic) like '%" . $request['input_filter'] . "%'")
+                    ->get()
+            ]);
         }
         return view('dashboard', [
-            'bids' => Bid::all()->where($request['select_filter'], $request['input_filter'])
+            'bids' => DB::table('Bids')
+                ->where($request['select_filter'], $request['input_filter'])
+                ->get()
         ]);
     }
 
