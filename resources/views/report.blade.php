@@ -42,35 +42,26 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    var year = <?php echo $year; ?>;
-    var user = <?php echo $year; ?>;
-    var barChartData = {
-        labels: ['15.09.2021','15.09.2021','15.09.2021','15.09.2021','15.09.2021','15.09.2021','15.09.2021'],
+    let days = <?php echo $days; ?>;
+    let bid_in_days = <?php echo $bid_in_days ; ?>;
+
+    let barChartData = {
+        labels: days,
         datasets: [{
             label: 'Заказы',
-            backgroundColor: "grey",
-            data: [1,2,3,4,5,6,7]
+            backgroundColor: "gray",
+            data: bid_in_days
         }]
     };
 
+
     window.onload = function() {
-        var ctx = document.getElementById("myChart").getContext("2d");
+        let ctx = document.getElementById("myChart").getContext("2d");
         window.myBar = new Chart(ctx, {
             type: 'bar',
             data: barChartData,
             options: {
-                elements: {
-                    rectangle: {
-                        borderWidth: 2,
-                        borderColor: '#c1c1c1',
-                        borderSkipped: 'bottom'
-                    }
-                },
                 responsive: true,
-                title: {
-                    display: true,
-                    text: 'Yearly User Joined'
-                }
             }
         });
     };

@@ -22,13 +22,31 @@ class ReportController extends Controller
 //    }
     public function index()
     {
-        $year = ['2015','2016','2017','2018','2019','2020'];
+        $auth = Auth::user();
+        if ($auth) {
+            if ($auth->hasRole('admin')) {
 
-        $bid = [];
-        foreach ($year as $key => $value) {
-            $bid[] = Bid::where(DB::raw("DATE_FORMAT(created_at, '%Y')"),$value)->count();
-        }
+                $dates = [];
+                $bids_date = Bid::all()->groupBy(function ($item) {
+                    return $item->created_at->format('d-M');
+                })->toArray();
+                $reversed_array = array_reverse($bids_date);
 
-        return view('report')->with('year',json_encode($year,JSON_NUMERIC_CHECK))->with('user',json_encode($bid,JSON_NUMERIC_CHECK));
+                $days = array_keys($reversed_array);
+
+                $big_in_day = [];
+                for ($i = 0; $i < count($days); $i++) {
+                    array_push($big_in_day, count($reversed_array[$days[$i]]));
+                }
+//                $days = implode(';', $days);
+//                $big_in_day = implode(';', $big_in_day);
+
+
+                return view('report')->with('days',json_encode($days,JSON_NUMERIC_CHECK))->with('bid_in_days',json_encode($big_in_day,JSON_NUMERIC_CHECK));
+
+            } else return view('dashboard');
+        } else return view('auth.login');
+
+//        return view('report')->with('year',json_encode($year,JSON_NUMERIC_CHECK))->with('user',json_encode($bid,JSON_NUMERIC_CHECK));
     }
 }

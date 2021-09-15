@@ -37,3 +37,5 @@ Route::group(['middleware' => ['role:admin']], function () {
 Route::post('/post', [BidController::class,'create'])->name('post');
 
 require __DIR__.'/auth.php';
+
+
