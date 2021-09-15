@@ -28,6 +28,8 @@ Route::group(['middleware' => ['role:admin']], function () {
         return view('test');
     });
     Route::post('/dashboard', [BidController::class, 'show'])->name('search');
+    Route::get('/bids/edit/{id}', [BidController::class, 'edit'])->name('edit');
+    Route::post('/bids/edit/{id}', [BidController::class, 'update'])->name('update');
 });
 
 

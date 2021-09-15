@@ -97,11 +97,18 @@ class BidController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $bid = Bid::find($id);
+        if ($bid) {
+            return view('bids.edit', [
+                'bid' => $bid
+            ]);
+        } else abort(404);
+
+
     }
 
     /**
@@ -113,7 +120,25 @@ class BidController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $valid = $request->validate([
+            'first_name' => 'required|min:2|max:20',
+            'last_name' => 'required|min:2|max:20',
+            'patronymic' => 'required|min:2|max:20',
+            'address' => 'required|min:2|max:100',
+            'phone' => 'required|min:11',
+            'email' => 'required|min:3|max:25',
+        ]);
+
+        $bid = Bid::find($id);
+        $bid->first_name = $request->first_name;
+        $bid->last_name = $request->last_name;
+        $bid->patronymic = $request->patronymic;
+        $bid->address = $request->address;
+        $bid->phone = $request->phone;
+        $bid->email = $request->email;
+        $bid->update();
+
+        return redirect('dashboard')->with('success', 'Успешное редактирование завявки');
     }
 
     /**
